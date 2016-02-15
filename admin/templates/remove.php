@@ -1,11 +1,11 @@
 <h1>Pagina verwijderen</h1>
 	<p>weet u zeker dat u onderstaande pagina wilt verwijderen?</p>
 	<form method="post" action="#" class="submitting">
-	<input type="hidden" name="id" value="<?php echo $id ?>"></input>
-	<input class="submit"  type="submit" value="Ja"></input>
+	<input type="hidden" name="id" value="<?php echo $id ?>">
+	<input class="submit"  type="submit" value="Ja">
 	</form>
 	<form action="index.php" class="submitting">
-	<input class="submit"  type="submit" value="Nee"></input>
+	<input class="submit"  type="submit" value="Nee">
 	</form>
 	<br>
 	<?php foreach($pagecontent as $content){ ?>

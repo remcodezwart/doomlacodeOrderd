@@ -2,6 +2,7 @@
 	require('logic/CoreLogic.php');
 
 	loginChek($link);
+	$id = $_GET['id'];
 	$pagecontent = getSingleRecord($link);
 	if (isset($_POST['id'])) {
 		EditLogic($link);

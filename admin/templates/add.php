@@ -2,12 +2,12 @@
 			<h2>Pagina toevoegen</h2>
 			<form method="post" action="#">
 			<label>Pagina:</label>
-			<input type="text" name="header"></input>
+			<input type="text" name="header">
 			<br>
 			<label>Menu-optie:</label>
-			<input type="text" name="option"></input>
+			<input type="text" name="option">
 			<label>Volgorden</label>
-			<input type="number" name="order"></input>
+			<input type="number" name="order">
 			<br>
 			<label>onder</label>
 			 <select name="under">
@@ -26,10 +26,10 @@
 			<br>
 
 			<label>template:(optioneel)</label>
-			<input value="template" type="text" name="template"></input>
+			<input value="template" type="text" name="template">
 			<label>Inhoud:</label>
 			<textarea name="page"></textarea>
-			<input class="submit" value="opslaan" type="submit"></input>
+			<input class="submit" value="opslaan" type="submit">
 			</form>
 			<a href="index.php">annuleren</a>
 	</div>
