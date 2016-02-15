@@ -1,4 +1,3 @@
-<body class="loginbackground">
 	<h1>Aanmelden</h1>
 	
 		<form method="post" action="#">
