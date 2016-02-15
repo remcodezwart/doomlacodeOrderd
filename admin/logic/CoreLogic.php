@@ -38,7 +38,7 @@
 		VALUES(?,?,?,?,?,?)");
 		$stmt->bind_param("ssssss", $headerPage,$h1,$option,$order,$template,$under);
 		$stmt->execute();
-		//header('Location: index.php');
+		header('Location: index.php');
 	}
 	//Deletes a single record
 	function Delete($link){
@@ -119,15 +119,15 @@
 	//cheks if the user is login if true then they can proceed if not there send to the login page
 	function loginChek($link){
 			 $username  = "";
-			 getAccessUsername();
+			 getAccessUsername($link);
 			 checkAccess($link);
 		}
 	function checkAccess($link){
 		$login = "";
-		 $username = getAccessUsername();
+		 $username = getAccessUsername($link);
 		 setSession($username,$link,$login);
 	}
-	function Chek($username){
+	function Chek($username,$link){
 		$token = (rand(1,9999999));
 		$token = (string)$token;
 		$expiring = time() + 600;
@@ -139,8 +139,8 @@
 		$stmt->execute();
 		$link->close();
 	}
-	function getAccessUsername(){
-		$link = new mysqli('localhost','root','','doomla');
+	function getAccessUsername($link){
+		
 	if(count($_COOKIE) <= 0){
 		header("Location:login.php");
 	}
