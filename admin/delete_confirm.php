@@ -1,5 +1,8 @@
 <?php 
 	require('logic/CoreLogic.php');
+	if (!isset($_GET['id'])) {
+		header("Location:index.php");
+	}
 	$id = "";
 	$id = $_GET['id'];
 	loginChek($link);
