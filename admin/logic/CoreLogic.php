@@ -51,18 +51,18 @@
 	}
 	//logic for editing a single record
 	function EditLogic($link){
-			$id = "";
-			$id = $_POST['id'];
-			$content = $_POST['content'];
-			$page = $_POST['page'];
-			$menu = $_POST['option'];
-			$order = $_POST['order'];
-			$template = $_POST['template'];
-			$under = $_POST['under'];
-			$stmt = $link->prepare("UPDATE `pagecontent.` SET page=?,content=?,menuoption=?,menuorder=?,template=?,pagecontentid=? WHERE id=?") ;
-			$stmt->bind_param("sssssss", $page,$content,$menu,$order,$template,$under,$id);
-			$stmt->execute();
-			header('Location: index.php');
+		$id = "";
+		$id = $_POST['id'];
+		$content = $_POST['content'];
+		$page = $_POST['page'];
+		$menu = $_POST['option'];
+		$order = $_POST['order'];
+		$template = $_POST['template'];
+		$under = $_POST['under'];
+		$stmt = $link->prepare("UPDATE `pagecontent.` SET page=?,content=?,menuoption=?,menuorder=?,template=?,pagecontentid=? WHERE id=?") ;
+		$stmt->bind_param("sssssss", $page,$content,$menu,$order,$template,$under,$id);
+		$stmt->execute();
+		header('Location: index.php');
 	}
 	//gets the data to display it
 	function getData($link){
@@ -89,7 +89,7 @@
 	//logs the user in if the password and username combination are valid D 
 	function login($link){
 		$login = "Login in";
-		if($link->connect_error){
+		if($link->connect_error) {
 			die("Connection failed: " . $link->connect_error);
 		}	
 		$username = "";
@@ -102,20 +102,18 @@
 		}
 		if(!($password != "" || $username != "")){
 			$erorr = "paswoord of usernaam leeg";
-		}
-		else{
-		$query = "SELECT * FROM user ";
-		$result = $link->query($query);
-		$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
+		} else {
+			$query = "SELECT * FROM user ";
+			$result = $link->query($query);
+			$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
 			foreach($pagecontent as $cheking){
 				if($username == $cheking['name'] && $password == $cheking['password']){
 					setSession($username,$link,$login);
 				}
 			}
-			$erorr = "foute gebruikersnaam of wachtwoord";
-			
-			}
+			$erorr = "foute gebruikersnaam of wachtwoord";	
 		}
+	}
 	//cheks if the user is login if true then they can proceed if not there send to the login page
 	function loginChek($link){
 			 $username  = "";
@@ -141,24 +139,22 @@
 	}
 	function getAccessUsername($link){
 		
-	if(count($_COOKIE) <= 0){
-		header("Location:login.php");
-	}
-	if($_COOKIE["User"] && $_COOKIE["Token"]){
+		if(count($_COOKIE) <= 0){
+			header("Location:login.php");
+		}
+		if($_COOKIE["User"] && $_COOKIE["Token"]){
 			$user = "User";
 			$Token = "Token";
 			$query = "SELECT * FROM user ";
 			$result = $link->query($query);
-			$pagecontent = $result->fetch_all(MYSQLI_ASSOC);	
-		foreach($pagecontent as $cheking){
-			$now = time();
-					if($_COOKIE[$user] == $cheking['name'] 
-					&& $_COOKIE[$Token] == $cheking['token']
-					&& $now < $cheking['expiry']);
-					{	
-						$username  = $_COOKIE[$user];
-						return $username;
-					}	
+			$pagecontent = $result->fetch_all(MYSQLI_ASSOC);
+
+			foreach($pagecontent as $cheking){
+				$now = time();
+				if($_COOKIE[$user] == $cheking['name'] && $_COOKIE[$Token] == $cheking['token'] && $now < $cheking['expiry']) {	
+					$username  = $_COOKIE[$user];
+					return $username;
+				}	
 			}
 			header("Location:login.php");
 		}
