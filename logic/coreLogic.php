@@ -2,8 +2,9 @@
 	require('config/config.php');
 // gets the data out of the database for the page 
 //makes the menu bar D
-function menu($link,$page,$PageContent){
+function menu($link,$page){
 	//if the page is not found the value of the variables makes an erorr page while still making the menu
+	$PageContent = array();
 	$title = "Error";
 	$contents = "Error page not found!";
 	$chek = "layout";
@@ -18,8 +19,7 @@ function menu($link,$page,$PageContent){
 							$title = $content['page'];
 							$chek = $content['template'];
 							$menu .= "\n<li class=\"active\"><a href=\"?page=$content[page]\">$content[menuoption]</a>";
-						}
-					else{
+						}else{
 							$menu .= "\n<li><a href=\"?page=$content[page]\">$content[menuoption]</a>";
 					}
 				if ($submenus != null) {
@@ -46,13 +46,13 @@ function menu($link,$page,$PageContent){
 }
 // makes a submenu if there is one D
 function getSubmenu ($link ,$id) {
-		$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE pagecontentid = ?");
-		$stmt->bind_param("s", $id);
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$submenus = $result->fetch_all(MYSQLI_ASSOC);
-		return $submenus;
-	}
+	$stmt = $link->prepare("SELECT * FROM `pagecontent.` WHERE pagecontentid = ?");
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$submenus = $result->fetch_all(MYSQLI_ASSOC);
+	return $submenus;
+}
 //returns $contents for display D
 function getContent($PageContent){
 		return  $PageContent['0'];		

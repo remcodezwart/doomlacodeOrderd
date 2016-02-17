@@ -2,10 +2,10 @@
 	require('../config/config.php');
 //gets the data to build an option menu for add.php and edit.php
    function getOptions($link){
-  				$query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>''";
-				$result = $link->query($query);
-				$under = $result->fetch_all(MYSQLI_ASSOC);
-				return $under;
+		$query = "SELECT * FROM `pagecontent.` WHERE pagecontentid = 0 AND menuoption<>''";
+		$result = $link->query($query);
+		$under = $result->fetch_all(MYSQLI_ASSOC);
+		return $under;
 	}
 	//gets the data for the edit page so that it can display the information the user wants to edit 
 	function getSingleRecord($link){
@@ -59,7 +59,8 @@
 		$order = $_POST['order'];
 		$template = $_POST['template'];
 		$under = $_POST['under'];
-		$stmt = $link->prepare("UPDATE `pagecontent.` SET page=?,content=?,menuoption=?,menuorder=?,template=?,pagecontentid=? WHERE id=?") ;
+		$stmt = $link->prepare("UPDATE `pagecontent.` SET page=?,content=?,menuoption=?,menuorder=?,template=?,pagecontentid=? 
+			WHERE id=?") ;
 		$stmt->bind_param("sssssss", $page,$content,$menu,$order,$template,$under,$id);
 		$stmt->execute();
 		header('Location: index.php');
@@ -78,7 +79,6 @@
 		$expiring = time() + 600;
 		setcookie("Token", $token, $expiring);
 		setcookie("User", $username, $expiring);
-		$username="jan";
 		$stmt = $link->prepare("UPDATE user SET  token=?, expiry=? WHERE name=? ");
 		$stmt->bind_param("sss", $token, $expiring, $username);
 		$stmt->execute();
@@ -131,7 +131,6 @@
 		$expiring = time() + 600;
 		setcookie("Token", $token, $expiring);
 		setcookie("User", $username, $expiring);
-		$username="jan";
 		$stmt = $link->prepare("UPDATE user SET  token=?, expiry=? WHERE name=? ");
 		$stmt->bind_param("sss", $token, $expiring, $username);
 		$stmt->execute();
